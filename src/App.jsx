@@ -3,11 +3,15 @@ import { useState } from 'react';
 const starterMessages = [
   {
     role: 'assistant',
-    content: 'Hello! I am Neural Chat Pro. I can help with ideas, summaries, support questions, and general conversation.'
+    content: 'Welcome. I am Neural Chat Pro, your refined AI companion for thoughtful conversations, polished writing, and intelligent support.'
   }
 ];
 
-const suggestions = ['Summarize this article', 'Help me write a professional email', 'Explain machine learning simply'];
+const suggestions = [
+  'Summarize this article in a polished way',
+  'Help me write a professional email',
+  'Explain AI in a simple, elegant way'
+];
 
 function App() {
   const [messages, setMessages] = useState(starterMessages);
@@ -32,7 +36,7 @@ function App() {
       });
 
       const data = await response.json();
-      const reply = data.reply || 'I am sorry, I could not generate a response.';
+      const reply = data.reply || 'I am sorry, I could not generate a response at the moment.';
       setMessages([...nextMessages, { role: 'assistant', content: reply }]);
     } catch (error) {
       setMessages([...nextMessages, { role: 'assistant', content: 'The assistant is currently unavailable. Please try again in a moment.' }]);
@@ -45,14 +49,14 @@ function App() {
     <div className="app-shell">
       <div className="panel">
         <aside className="sidebar">
-          <div>
+          <div className="brand-block">
             <p className="eyebrow">AI Assistant</p>
             <h1>Neural Chat Pro</h1>
-            <p className="subtitle">A polished conversational assistant built with React, Node.js, and Hugging Face.</p>
+            <p className="subtitle">A refined conversational experience designed for clarity, premium presentation, and modern AI workflows.</p>
           </div>
 
           <div className="card">
-            <h2>Try one of these</h2>
+            <h2>Try a prompt</h2>
             <div className="suggestions">
               {suggestions.map((suggestion) => (
                 <button key={suggestion} onClick={() => setInput(suggestion)}>
@@ -67,7 +71,7 @@ function App() {
           <header className="chat-header">
             <div>
               <p className="eyebrow">Live workspace</p>
-              <h2>Professional assistant experience</h2>
+              <h2>Elegant assistant experience</h2>
             </div>
             <span className="status-pill">Online</span>
           </header>
@@ -78,14 +82,14 @@ function App() {
                 {message.content}
               </div>
             ))}
-            {isLoading && <div className="bubble assistant loading">Thinking...</div>}
+            {isLoading && <div className="bubble assistant loading">Thinking thoughtfully...</div>}
           </div>
 
           <form className="composer" onSubmit={handleSubmit}>
             <input
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder="Ask anything..."
+              placeholder="Ask anything with confidence..."
               aria-label="Message input"
             />
             <button type="submit" disabled={isLoading}>
